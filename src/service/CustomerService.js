@@ -1,13 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8080/customers'; // Adjust as per your API endpoint
-
-const getAuthHeader = () => {
-    const token = localStorage.getItem('jwtToken') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'; 
-    return token ? { Authorization: `Bearer ${token}` } : {};
-  };
-
-  //, { headers: getAuthHeader() }
+const BASE_URL = process.env.REACT_APP_API_BASE_URL + '/customers'; 
 
 const CustomerService = {
     getAllCustomers() {

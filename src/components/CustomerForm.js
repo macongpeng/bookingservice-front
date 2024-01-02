@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CustomerService from './CustomerService';
+import CustomerService from '../service/CustomerService';
 
 const CustomerForm = ({ customerId, setCustomerId }) => {
     const [customer, setCustomer] = useState({ name: '', email: '', phoneNumber: '' });

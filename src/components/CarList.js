@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CarService from './CarService';
+import CarService from '../service/CarService';
 
 const CarList = () => {
     const [cars, setCars] = useState([]);

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import CustomerList from './components/CustomerList';
 import CarList from './components/CarList';
 import BookingList from './components/BookingList';
+import LoginPage from './components/LoginPage';
 import './App.css';
 
 function App() {

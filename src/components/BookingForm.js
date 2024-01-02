@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import BookingService from './BookingService';
+import BookingService from '../service/BookingService';
 
 const BookingForm = ({ bookingId, setBookingId }) => {
     const [booking, setBooking] = useState({ date: '', serviceDescription: '', carId: '' });

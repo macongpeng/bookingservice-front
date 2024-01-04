@@ -1,11 +1,25 @@
 import React, { useState, useEffect} from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import CustomerService from '../service/CustomerService';
 
-const CustomerForm = ({ customerId, setCustomerId }) => {
+const CustomerForm = () => {
     const [customer, setCustomer] = useState({ name: '', email: '', phoneNumber: '' });
     const [isSubmitted, setIsSubmitted] = useState(false);
     const history = useHistory();
+    const { customerId } = useParams(); 
+
+    useEffect(() => {
+        if (customerId) {
+            CustomerService.getCustomerById(customerId)
+                .then(response => {
+                    setCustomer(response.data); // Load customer data
+                })
+                .catch(error => {
+                    console.error('Failed to fetch customer', error);
+                    // Handle error here
+                });
+        }
+    }, [customerId]);
 
     useEffect(() => {
         if (isSubmitted) {

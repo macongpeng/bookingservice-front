@@ -29,7 +29,10 @@ function App() {
           <Route path="/customers">
             <CustomerList />
           </Route>
-          <Route path="/customersNew">
+          <Route path="/customer/edit/:customerId">
+            <CustomerForm />
+          </Route>          
+          <Route path="/customer/new">
             <CustomerForm />
           </Route>          
           <Route path="/cars">

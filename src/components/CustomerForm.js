@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
+import { useHistory } from 'react-router-dom';
 import CustomerService from '../service/CustomerService';
 
 const CustomerForm = ({ customerId, setCustomerId }) => {
     const [customer, setCustomer] = useState({ name: '', email: '', phoneNumber: '' });
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const history = useHistory();
 
-    const handleSubmit = (event) => {
+    useEffect(() => {
+        if (isSubmitted) {
+            history.push('/customers');
+        }
+    }, [isSubmitted, history]);
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (customerId) {
-            CustomerService.updateCustomer(customerId, customer)
+            await CustomerService.updateCustomer(customerId, customer)
                 .then(/* handle success */)
                 .catch(/* handle error */);
         } else {
-            CustomerService.createCustomer(customer)
+            await CustomerService.createCustomer(customer)
                 .then(/* handle success */)
                 .catch(/* handle error */);
         }
-        setCustomerId(null);
+        //setCustomerId(null);
+        setIsSubmitted(true);
     };
-
-    useEffect(() => {
-        if (customerId) {
-            CustomerService.getCustomerById(customerId)
-                .then(response => {
-                    setCustomer(response.data);
-                })
-                .catch(/* handle error */);
-        }
-    }, [customerId]);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;

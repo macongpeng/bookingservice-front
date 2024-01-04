@@ -1,0 +1,14 @@
+.customer-list-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    margin-bottom: 10px; /* Add some space between the header and the list */
+}
+
+.add-new-link {
+    text-decoration: none;
+    color: blue;
+    /* additional styling for the link */
+}

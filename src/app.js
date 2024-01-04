@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import CustomerList from './components/CustomerList';
+import CustomerForm from './components/CustomerForm'; 
 import CarList from './components/CarList';
 import BookingList from './components/BookingList';
 import LoginPage from './components/LoginPage';
@@ -28,6 +29,9 @@ function App() {
           <Route path="/customers">
             <CustomerList />
           </Route>
+          <Route path="/customersNew">
+            <CustomerForm />
+          </Route>          
           <Route path="/cars">
             <CarList />
           </Route>

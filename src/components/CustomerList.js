@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CustomerService from '../service/CustomerService';
+import Pagination from './Pagination';
 import './CustomerList.css';
 
 const CustomerList = () => {
     const [customers, setCustomers] = useState([]);
     const [selectedCustomers, setSelectedCustomers] = useState([]);
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const [customersPerPage] = useState(10); // Adjust the number per page as needed
+    
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+    
     useEffect(() => {
         fetchCustomers();
     }, []);
 
     const fetchCustomers = () => {
         CustomerService.getAllCustomers().then(response => {
-            setCustomers(response.data);
+            setCustomers(response.data.content);
         });
     };
+
+    const indexOfLastCustomer = currentPage * customersPerPage;
+    const indexOfFirstCustomer = indexOfLastCustomer - customersPerPage;
+    const currentCustomers = customers.slice(indexOfFirstCustomer, indexOfLastCustomer);
 
     const handleCheckboxChange = (customerId) => {
         const updatedSelection = selectedCustomers.includes(customerId)
@@ -61,6 +70,11 @@ const CustomerList = () => {
                     </li>
                 ))}
             </ul>
+            <Pagination
+                customersPerPage={customersPerPage}
+                totalCustomers={customers.length}
+                paginate={paginate}
+            />
         </div>
     );
 };
